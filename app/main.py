@@ -23,8 +23,8 @@ async def lifespan(app: FastAPI):
 app = FastAPI(
     title=settings.PROJECT_NAME,
     version=settings.VERSION,
-    openapi_url=f"{settings.API_PREFIX}/openapi.json",
-    docs_url=f"{settings.API_PREFIX}/docs",
+    openapi_url="/openapi.json",
+    docs_url="/docs",
     redoc_url=None,
     lifespan=lifespan,
 )
@@ -38,4 +38,4 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(api_router, prefix=settings.API_PREFIX)
+app.include_router(api_router)

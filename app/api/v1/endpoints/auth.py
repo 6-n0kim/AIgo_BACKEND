@@ -19,5 +19,6 @@ async def register(payload: UserCreate, db: asyncpg.Connection = Depends(get_db)
 @router.post("/login", response_model=Token)
 async def login(form: OAuth2PasswordRequestForm = Depends(), db: asyncpg.Connection = Depends(get_db)):
     """Login user and return access token (OAuth2PasswordRequestForm uses 'username' field for email)"""
+    print(f"Login attempt: {form}")
     user, token = await auth_service.login(db, email=form.username, password=form.password)
     return {"access_token": token, "token_type": "bearer", "user": UserPublic(**user)}

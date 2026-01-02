@@ -16,7 +16,6 @@ class Settings(BaseSettings):
 
     PROJECT_NAME: str = "AIgo API"
     VERSION: str = "0.1.0"
-    API_PREFIX: str = "/api/v1"
 
     # 개발: http://localhost:7001 (React)
     CORS_ORIGINS: list[str] = ["http://localhost:7001", "http://127.0.0.1:7001"]

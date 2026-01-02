@@ -1,6 +1,4 @@
 import asyncpg
-from contextlib import asynccontextmanager
-from typing import AsyncGenerator
 
 from app.core.config import settings
 
@@ -40,8 +38,7 @@ def get_pool() -> asyncpg.Pool:
     return _pool
 
 
-@asynccontextmanager
-async def get_db() -> AsyncGenerator[asyncpg.Connection, None]:
+async def get_db() -> asyncpg.Connection:
     """
     Dependency to get database connection.
     Usage in FastAPI endpoint:

@@ -18,7 +18,7 @@ class Settings(BaseSettings):
     VERSION: str = "0.1.0"
 
     # 개발: http://localhost:7001 (React)
-    CORS_ORIGINS: list[str] = ["http://localhost:7001", "http://127.0.0.1:7001"]
+    CORS_ORIGINS: list[str] = ["http://localhost:7001", "http://127.0.0.1:7001", "https://aigo-frontend.vercel.app"]
 
     # Database connection parameters
     DB_USER: str = USER

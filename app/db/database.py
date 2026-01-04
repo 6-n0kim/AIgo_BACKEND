@@ -76,6 +76,7 @@ async def init_schema() -> None:
             CREATE TABLE IF NOT EXISTS topic (
                 id SERIAL PRIMARY KEY,
                 name TEXT NOT NULL,
+                kor_name TEXT NOT NULL,
                 slug TEXT NULL,
                 summary TEXT NULL,
                 CONSTRAINT uk_topic_slug UNIQUE (slug)
@@ -85,7 +86,8 @@ async def init_schema() -> None:
         # Add comments for documentation
         await conn.execute("COMMENT ON TABLE topic IS '토픽'")
         await conn.execute("COMMENT ON COLUMN topic.id IS '토픽ID'")
-        await conn.execute("COMMENT ON COLUMN topic.name IS '이름'")
+        await conn.execute("COMMENT ON COLUMN topic.name IS '영어이름'")
+        await conn.execute("COMMENT ON COLUMN topic.kor_name IS '한글이름'")
         await conn.execute("COMMENT ON COLUMN topic.slug IS '약어'")
         await conn.execute("COMMENT ON COLUMN topic.summary IS '설명'")
 

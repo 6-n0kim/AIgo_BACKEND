@@ -16,3 +16,7 @@ class Token(BaseModel):
     access_token: str
     token_type: str = "bearer"
     user: UserPublic
+
+class EmailCheckResponse(BaseModel):
+    available: bool
+    message: str

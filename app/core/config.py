@@ -10,7 +10,9 @@ PASSWORD = os.getenv("dbpassword")
 HOST = os.getenv("dbhost")
 PORT = os.getenv("dbport")
 DBNAME = os.getenv("dbname")
-
+SECRET = os.getenv("JWT_SECRET")
+ALGORITHM=os.getenv("JWT_ALGORITHM")
+ACCESS_TOKEN_EXPIRE_MINUTES=os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES")
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 
@@ -28,8 +30,8 @@ class Settings(BaseSettings):
     DB_NAME: str = DBNAME
 
     # JWT
-    JWT_SECRET: str = "CHANGE_ME_TO_A_LONG_RANDOM_SECRET"
-    JWT_ALGORITHM: str = "HS256"
-    ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24  # 24h
+    JWT_SECRET: str = SECRET
+    JWT_ALGORITHM: str = ALGORITHM
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = ACCESS_TOKEN_EXPIRE_MINUTES
 
 settings = Settings()

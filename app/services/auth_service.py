@@ -19,10 +19,22 @@ async def register(db: asyncpg.Connection, *, email: str, password: str) -> tupl
 async def login(db: asyncpg.Connection, *, email: str, password: str) -> tuple[dict, str]:
     """Login user and return access token"""
     user = await user_repo.get_by_email(db, email)
-    if not user or not verify_password(password, user["hashed_password"]):
-        raise unauthorized("Incorrect email or password")
+    if not user:
+        raise unauthorized("아이디가 존재하지 않습니다")
+    elif not verify_password(password, user["hashed_password"]):
+        raise unauthorized("비밀번호가 일치하지 않습니다")
     if not user["is_active"]:
-        raise unauthorized("Inactive user")
+        raise unauthorized("회원이 활성화되지 않았습니다")
 
     token = create_access_token(subject=str(user["id"]))
+    print(f"Token: {token}")
     return user, token
+
+async def check_email(db: asyncpg.Connection, *, email: str) -> dict:
+    """Check if email is available"""
+    user = await user_repo.get_by_email(db, email)
+    print(f"User: {user}")
+    if user is None:
+        return {"available": True, "message": "Email is available"}
+    else:
+        return {"available": False, "message": "Email is already in use"}
